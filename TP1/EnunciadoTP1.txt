@@ -1,0 +1,14 @@
+1. Ingresar el comando para correo de la imagen de postgres, correo de segundo plano, nombre del contenedor de postgres, variable de entorno para el usuario
+postgres, puerto del anfitrion y del contenedor y por ultimo el nombre de la imagen tal cula como aparece en el buscador de dockerhub.
+$ docker run -d --name pgdani -p 8090:80 -e PGADMIN_DEFAULT_EMAIL=jdcalle2@sudamericano.edu.ec -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4
+2. Crear una red para que se pueda cambiar con el siguiente comando:
+$ docker network create --attachable redcasa
+3. Agregar los contenedores a la red:
+3.1 Aberiguamos el container con el siguiente comando:
+$ docker ps -a
+3.2 agregar el contenedor de postgrest con el siguiente comando:
+$ docker network connect redcasa 99ceabbca498
+3.3 Agregar contenedor de pagadmin con el siguienete comando:
+$ docker network connect redcasa pgdani
+3.4 Verificar contenedores conectados a la red. Este comando se encarga de mostrar las IPs que se asignan a cada contenedor.
+$ docker inspect redcasa
